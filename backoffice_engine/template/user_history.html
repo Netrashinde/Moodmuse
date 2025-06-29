@@ -1,0 +1,39 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="p-4" style="border:1px solid #ddd; border-radius:10px; background:#fff;">
+        <h2 class="text-center mb-4">User Music History</h2>
+
+        {% for record in all_history %}
+        <div class="mb-3 p-3" style="border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+
+            {% if record.photos %}
+                <img src="{{ record.photos.url }}" alt="Uploaded Photo" 
+                     style="max-width:100%; height:auto; border-radius:10px; margin-bottom:20px;">
+            {% else %}
+                <p>No photo uploaded.</p>
+            {% endif %}
+
+            <h4>Detected Emotion</h4>
+            <pre><strong>{{ record.detected_emotion }}</strong></pre>
+
+            <h4>Preferred Mood for Song</h4>
+            <p><strong>{{ record.user_song }}</strong></p>
+
+            <h4>Audio Preview</h4>
+            {% if record.song %}
+                <div class="mt-4 text-center">
+                    <audio controls style="width:100%;">
+                        <source src="{{ record.song.url }}" type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            {% else %}
+                <p class="text-muted text-center mt-3">No audio file available.</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feedback Form</title>
+  <style>
+    body {
+      background-color: #0f1b2a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .feedback-box {
+      background-color: #1e2a38;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .feedback-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00f5d4;
+    }
+    
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      color: #ccc;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      background: #2f3b4c;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      background: #2f3b4c;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      resize: vertical; /* optional: allow resizing */
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .star {
+      font-size: 30px;
+      color: #555;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .star:hover,
+    .star.selected {
+      color: #ffc107;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00f5d4;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0cf1bd;
+    }
+  </style>
+</head>
+<body>
+
+<div class="feedback-box">
+  <h2>Give Your Feedback</h2>
+  <form method="post" action="">
+    {% csrf_token %}
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" required>
+    <label>Description</label>
+  <textarea name="description" required></textarea>
+
+    <label>Rate Us</label>
+    <div class="stars" id="star-rating">
+      <span class="star" data-value="1">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="5">&#9733;</span>
+    </div>
+    <input type="hidden" name="rating" id="rating" required>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+</div>
+
+<script>
+  const stars = document.querySelectorAll('.star');
+  const ratingInput = document.getElementById('rating');
+
+  stars.forEach((star, idx) => {
+    star.addEventListener('click', () => {
+      ratingInput.value = star.dataset.value;
+      stars.forEach(s => s.classList.remove('selected'));
+      for (let i = 0; i <= idx; i++) {
+        stars[i].classList.add('selected');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

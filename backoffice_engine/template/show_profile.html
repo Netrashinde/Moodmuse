@@ -1,0 +1,45 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+<section class="profile-section spad">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>User Profile</h2>
+        </div>
+        <div class="row justify-content-center">
+            <!-- User Info Card -->
+            <div class="col-lg-5 mb-4">
+                <div class="p-4 rounded" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Name:</strong> {{ user.name }}</li>
+                        <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                        <li class="list-group-item"><strong>Contact:</strong> {{ user.contact }}</li>
+                        <li class="list-group-item"><strong>Address:</strong> {{ user.address }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Subscription Info Card -->
+            <div class="col-lg-5 mb-4">
+                <div class="p-4 rounded" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                    {% if active_sub %}
+                        <h4 class="mb-3">Your Current Plan</h4>
+                        <p><strong>Plan Name:</strong> {{ active_sub.plan.name }}</p>
+                        <p><strong>Credits Remaining:</strong> {{ active_sub.credit }}</p>
+                        <p><strong>Valid Until:</strong> {{ active_sub.end_date }}</p>
+                    {% else %}
+                        <div class="alert alert-warning mt-3">
+                            You do not currently have an active subscription plan.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Update Button Full Width -->
+            <div class="col-12 text-center mt-3">
+                <a href="/user_profile/" class="site-btn" style="padding: 12px 30px; font-weight: bold;">UPDATE PROFILE</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

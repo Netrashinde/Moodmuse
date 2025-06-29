@@ -1,0 +1,35 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+
+  <!-- Login form section -->
+  <section class="spad">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <h2 class="text-center mb-4">Update Profile</h2>
+          <form method="post" action="/update_profile/{{user.id}}">
+            {% csrf_token %}
+            
+            <div class="form-group">
+              <label for="id_name">Name</label>
+              <input type="text" class="form-control" id="id_name" name="name" value="{{user.name}}" placeholder="Enter Name" required>
+            </div>
+            <div class="form-group">
+              <label for="id_contact">Contact</label>
+              <input type="text" class="form-control" id="id_contact" name="contact" value="{{user.contact}}" placeholder="Enter Contact" required>
+            </div>
+
+            <button type="submit" class="site-btn w-100 mt-3">Update Details</button>
+            
+            {% for data in messages %}
+                <span style="color: red"> {{data}}</span>
+            {% endfor %}
+ 
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+
+  <!-- Login form section -->
+  <section class="spad">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <h2 class="text-center mb-4">Login</h2>
+          <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+              <label for="id_email">Email address</label>
+              <input type="email" class="form-control" id="id_email" name="email" placeholder="Enter email" required>
+            </div>
+
+            <div class="form-group">
+                    <div class="d-block">
+                      <label for="password" class="control-label">Password</label>
+                      <div class="float-right">
+                        <a href="/Forgot/" class="text-small">
+                          Forgot Password?
+                        </a>
+                      </div>
+                    </div>
+                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      please fill in your password
+                    </div>
+                  </div>
+                  
+            <button type="submit" class="site-btn w-100 mt-3">Login</button>
+                   {% for data in messages %}
+                    <span style="color: red"> {{data}}</span>
+                    {% endfor %}
+            <div class="mt-5 text-muted text-center">
+              Don't have an account? <a href="/Register/">Create One</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

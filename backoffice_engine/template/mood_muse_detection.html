@@ -1,0 +1,54 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="p-4" style="border:1px solid #ddd; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background-color:#fff; width:100%; max-width:500px;">
+        <h2 class="text-center mb-4">Mood Muse Detection</h2>
+
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <input type="file" name="photos" id="photoInput" accept="image/*" onchange="previewPhoto()">
+            <br><br>
+            
+            <!-- Image Preview -->
+            <div id="previewContainer" style="display:none; text-align:center;">
+                <img id="photoPreview" src="#" alt="Image Preview" style="max-width: 100%; max-height: 300px; border-radius: 8px;" />
+                <br><br>
+            </div>
+
+            <input type="hidden" name="user" value="{{ request.session.id }}">
+            <button type="submit" class="btn btn-primary w-100">Upload Photo</button>
+        </form>
+    </div>
+</div>
+
+<!-- Preview Script -->
+<script>
+function previewPhoto() {
+    const input = document.getElementById('photoInput');
+    const preview = document.getElementById('photoPreview');
+    const container = document.getElementById('previewContainer');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            container.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        container.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}
+
