@@ -1,0 +1,112 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+
+<div class="main-section">
+    <h1>Choose Your Subscription Plan</h1>
+
+    {% if active_sub %}
+        <div class="alert alert-success text-center mt-3">
+            Your current plan: <strong>{{ active_sub.plan.name }}</strong><br>
+            Credits left: <strong>{{ active_sub.credit }}</strong><br>
+            Valid until: <strong>{{ active_sub.end_date }}</strong>
+        </div>
+    {% endif %}
+
+    <div class="plans-container">
+        {% for plan in plans %}
+            <div class="plan-card">
+                <h3>{{ plan.name }} Plan</h3>
+                <p class="price">
+                    {% if plan.price == 0 %}
+                        Free
+                    {% else %}
+                        ₹{{ plan.price }}
+                    {% endif %}
+                </p>
+                <p>{{ plan.description }}</p>
+                <p>Credits: {{ plan.credit }}</p>
+                <p>Duration: {{ plan.duration_days }} days</p>
+
+                <form method="POST" action="/plan_details/">
+                    {% csrf_token %}
+                    <input type="hidden" name="planid" value="{{ plan.id }}">
+                    
+                    {% if plan.price == 0 %}
+                        {% if user_has_trial %}
+                            <button type="button" class="btn btn-light" style="cursor: not-allowed;" disabled>Deactivated</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-light">Activate Free Trial</button>
+                        {% endif %}
+                    {% else %}
+                        <script
+                            src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="rzp_test_vZMkgINLTMs169"
+                            data-amount="{{ plan.price|mul:100 }}"
+                            data-currency="INR"
+                            data-order_id="{{ payment.id|default:'' }}"
+                            data-buttontext="Pay with Razorpay"
+                            data-name="YourMusic"
+                            data-description="{{ plan.name }}"
+                            data-prefill.name="{{ request.user.username }}"
+                            data-prefill.email="{{ request.user.email }}"
+                            data-theme.color="#F37254"
+                        ></script>
+                    {% endif %}
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1c40;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin: 40px 0;
+    color: white; 
+    font-weight: bold; 
+}
+.plans-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.plan-card {
+    background: #162e57;
+    border-radius: 16px;
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+.plan-card:hover {
+    transform: scale(1.05);
+}
+.plan-card h3 {
+    color: #ff4757;
+    font-size: 24px;
+}
+.plan-card .price {
+    font-size: 28px;
+    color: #f1c40f;
+    font-weight: bold;
+}
+.plan-card p {
+    margin: 12px 0;
+    font-size: 16px;
+}
+</style>
+
+{% endblock %}
+
+

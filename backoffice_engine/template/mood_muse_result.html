@@ -1,0 +1,35 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="p-4" style="border:1px solid #ddd; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background-color:#fff;">
+        <h2 class="text-center mb-4">Mood Detection Result</h2>
+
+        {% if detected_emotion_data.photos %}
+            <img src="{{ detected_emotion_data.photos.url }}" alt="Uploaded Photo" 
+                style="max-width:100%; height:auto; border-radius:10px; margin-bottom:20px;">
+        {% else %}
+            <p>No photo uploaded.</p>
+        {% endif %}
+
+
+        <h4>Mood Percentages</h4>
+        <p><strong>Detected Emotion : </strong></p>
+        <pre>{{ detected_emotion_data.detected_emotion }}</pre>
+    
+            
+            <form method="post" action="/generate_song/{{detected_emotion_data.id}}">
+
+            {% csrf_token %}
+            <div class="form-group mt-3">
+                <label for="custom_song_type">Prefer Your Song:</label>
+               <input type="text" name="preferred_song" id="preferred_song" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-success mt-3 w-100">Generate Song</button>
+        </form>
+
+        <a href="/mood_muse_detection/" class="btn btn-secondary mt-3 w-100">Upload Another Photo</a>
+    </div>
+</div>
+{% endblock %}

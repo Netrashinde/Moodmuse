@@ -1,0 +1,37 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="p-4" style="border:1px solid #ddd; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); background-color:#fff;">
+        <h2 class="text-center mb-4">Your Generated Song</h2>
+
+        {% if result.photos %}
+            <img src="{{ result.photos.url }}" alt="Uploaded Photo" 
+                 style="max-width:100%; height:auto; border-radius:10px; margin-bottom:20px;">
+        {% else %}
+            <p>No photo uploaded.</p>
+        {% endif %}
+
+        <h4>Detected Emotion</h4>
+        <p><strong>{{ result.detected_emotion }}</strong></p>
+
+        <h4>Preferred Mood for Song</h4>
+        <p><strong>{{ result.user_song }}</strong></p>
+
+        <h4>Audio Preview</h4>
+        {% if result.song %}
+            <div class="mt-4 text-center">
+                <audio controls style="width:100%;">
+                    <source src="{{ result.song.url }}" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        {% else %}
+            <p class="text-muted text-center mt-3">No audio file available.</p>
+        {% endif %}
+
+        <a href="/mood_muse_detection/" class="btn btn-secondary mt-4 w-100">Generate Another Song</a>
+        <a href="/user_history/" class="btn btn-secondary mt-4 w-100">Your History</a>
+    </div>
+</div>
+{% endblock %}
