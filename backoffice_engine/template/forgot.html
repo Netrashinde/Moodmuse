@@ -1,0 +1,44 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+{% block content %}
+
+<div id="app">
+  <section class="hero-section text-center" style="background: #ffffff; padding: 60px 20px;">
+    <h2 style="color: #000000;">Forgot Password</h2>
+    <p style="color: #162e57;">Enter your registered email to receive an OTP</p>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="email" class="text-dark">Email</label>
+                  <input id="email" type="email" class="form-control" name="email" required autofocus>
+                  <div class="invalid-feedback">
+                    Please enter your email address.
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-danger btn-block">Send OTP</button>
+              </form>
+
+              {% if messages %}
+              <div class="mt-3">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <a href="/Login/" class="btn btn-link mt-3">Back to Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

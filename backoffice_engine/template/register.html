@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <title>Register | SolMusic</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Favicon -->
+  <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-section clearfix">
+    <a href="{% static 'index.html' %}" class="site-logo">
+      <img src="{% static 'img/logo.png' %}" alt="">
+    </a>
+    <div class="header-right">
+      <a href="#" class="hr-btn">Help</a>
+      <span>|</span>
+      <div class="user-panel">
+        <a href="/Login/" class="login">Login</a>
+        <a href="/Register/" class="register">Create an account</a>
+      </div>
+    </div>
+    <ul class="main-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Pages</a></li>
+      <li><a href="blog.html">News</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </header>
+
+  <!-- Registration Form Section -->
+  <section class="spad">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <h2 class="text-center mb-4">Create an Account</h2>
+          <form method="post" >
+         {% csrf_token %}
+           <div class="form-group">
+           <label for="name">Full Name</label>
+             <input type="text" class="form-control" name="name" id="name" placeholder="Enter full name" required>
+             </div>
+             <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" required>
+             </div>
+            <div class="form-group">
+              <label for="contact">Contact</label>
+               <input type="text" class="form-control" name="contact" id="contact" placeholder="Enter contact number" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea class="form-control" name="address" id="address" rows="3" placeholder="Enter address" required></textarea>
+             </div>
+             <div class="form-group">
+                <label for="password">Password</label>
+                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+             </div>
+                <button type="submit" class="site-btn w-100 mt-3">Register</button>
+            </form>
+          <div class="mb-4 text-muted text-center">
+                Already Registered? <a href="/Login/">Login</a>
+              </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-lg-7 order-lg-2">
+          <!-- Footer widgets as in index.html -->
+        </div>
+        <div class="col-xl-6 col-lg-5 order-lg-1">
+          <img src="{% static 'img/logo.png' %}" alt="">
+          <div class="copyright">
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+            All rights reserved | Made by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

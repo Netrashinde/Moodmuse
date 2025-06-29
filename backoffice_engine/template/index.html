@@ -1,0 +1,236 @@
+{% extends 'header_footer.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- Hero section -->
+<section class="hero-section text-center text-white" style="background: #162e57; padding: 60px 20px;">
+    <h1>Welcome to YourMusic</h1>
+    <p>Unlimited music streaming, no ads, offline play and more.</p>
+    <a href="#" class="btn btn-primary">Download Now</a>
+
+    <!-- Free Trial Form -->
+    <form method="POST" action="/plan_details/" style="display:inline-block;">
+        {% csrf_token %}
+        <input type="hidden" name="planid" value="free_trial">
+        <button type="submit" class="btn btn-outline-light">Start Free Trial</button>
+    </form>
+</section>
+
+<!-- Intro section -->
+<section class="intro-section spad">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="section-title">
+                    <h2>About Our App</h2>
+                    <img src="{% static 'img/about-music.jpg' %}" 
+                         alt="Mood to Music AI" class="img-fluid rounded shadow mt-3">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <p>
+                    Welcome to <strong>MoodMuse</strong> – your intelligent music companion that truly understands you.
+                    <br><br>
+                    Our app leverages advanced emotion detection technology to analyze your mood directly from an uploaded image. Whether you're feeling <strong>joyful</strong>, <strong>sad</strong>, <strong>angry</strong>, or anywhere in between, MoodMuse identifies your emotional state using facial expression analysis.
+                    <br><br>
+                    Based on your mood, you can select a preferred genre or vibe — and our system will generate a unique, AI-powered song crafted especially for you.
+                    <br><br>
+                    Whether you're looking to uplift your spirit, soothe your mind, or simply vibe with your emotions — <strong>MoodMuse</strong> is here to soundtrack your mood.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- How section -->
+<section class="how-section spad set-bg" data-setbg="{% static 'img/how-to-bg.jpg' %}">
+    <div class="container text-white">
+        <div class="section-title">
+            <h2>How it works</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="how-item">
+                    <div class="hi-icon">
+                        <img src="{% static 'img/icons/brain.png' %}" alt="">
+                    </div>
+                    <h4>Create an account</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="how-item">
+                    <div class="hi-icon">
+                        <img src="{% static 'img/icons/pointer.png' %}" alt="">
+                    </div>
+                    <h4>Insert Your Photo</h4>
+                    <p>Donec in sodales dui, a blandit nunc. Pellentesque id eros venenatis, sollicitudin neque sodales, vehicula nibh.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="how-item">
+                    <div class="hi-icon">
+                        <img src="{% static 'img/icons/smartphone.png' %}" alt="">
+                    </div>
+                    <h4>Have Your Emotion And Music</h4>
+                    <p>Pellentesque id eros venenatis, sollicitudin neque sodales, vehicula nibh. Nam massa odio, porttitor vitae efficitur non.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Why Choose MoodMuse Section -->
+<section class="why-choose-section spad">
+    <div class="container">
+        <div class="section-title text-center mb-5">
+            <h2>Why Choose MoodMuse?</h2>
+            <p>Your emotions deserve a soundtrack — here’s why MoodMuse is different.</p>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-center table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Feature</th>
+                        <th>MoodMuse</th>
+                        <th>Other Music Apps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Emotion-Based Music</td>
+                        <td>✅ Yes — Uses AI to detect your mood</td>
+                        <td>❌ No mood-based personalization</td>
+                    </tr>
+                    <tr>
+                        <td>AI-Generated Songs</td>
+                        <td>✅ Unique songs created for each user</td>
+                        <td>❌ Fixed music library only</td>
+                    </tr>
+                    <tr>
+                        <td>No Ads</td>
+                        <td>✅ Completely ad-free experience</td>
+                        <td>❌ Ads interrupt music flow</td>
+                    </tr>
+                    <tr>
+                        <td>Personalized Playlists</td>
+                        <td>✅ Generated based on your emotion</td>
+                        <td>🔸 Basic recommendations</td>
+                    </tr>
+                    <tr>
+                        <td>Free Trial</td>
+                        <td>✅ Yes — Start instantly</td>
+                        <td>🔸 Limited or paid-only access</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Subscription section -->
+<section class="subscription-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="sub-text">
+                    <h2>Subscription from $15/month</h2>
+                    <h3>Start a free trial now</h3>
+                    <p>Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <a href="/plan_details/" class="site-btn">Try it now</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ul class="sub-list">
+                    <li><img src="{% static 'img/icons/check-icon.png' %}" alt="">Play any track</li>
+                    <li><img src="{% static 'img/icons/check-icon.png' %}" alt="">Listen offline</li>
+                    <li><img src="{% static 'img/icons/check-icon.png' %}" alt="">No ad interruptions</li>
+                    <li><img src="{% static 'img/icons/check-icon.png' %}" alt="">Unlimited skips</li>
+                    <li><img src="{% static 'img/icons/check-icon.png' %}" alt="">High quality audio</li>
+                    <li><img src="{% static 'img/icons/check-icon.png' %}" alt="">Shuffle play</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="premium-section">
+  <div class="section-title">
+    <h2>User Feedback</h2>
+  </div>
+
+  <div class="feedback-container">
+    <button class="arrow left" onclick="scrollFeedback(-1)">&#10094;</button>
+
+    <!-- ✅ Dynamic feedback scroll section -->
+    <div class="feedback-scroll" id="feedbackScroll">
+      {% for f in feedbacks %}
+        <div class="feedback-box">
+          <p>“{{ f.description }}”</p>
+          <h5>– {{ f.name }}</h5>
+          <div class="feedback-rating">
+    {% for i in "12345" %}
+      {% if forloop.counter <= f.rating %}
+        <span style="color: gold;">&#9733;</span>  <!-- filled star -->
+      {% else %}
+        <span style="color: #ccc;">&#9734;</span>  <!-- empty star -->
+      {% endif %}
+    {% endfor %}
+  </div>
+        </div>
+      {% empty %}
+      
+
+
+      {% endfor %}
+    </div>
+
+    <button class="arrow right" onclick="scrollFeedback(1)">&#10095;</button>
+</div>
+
+  <!--feedback button-->
+  <div style="text-align:center; margin-top: 30px;">
+    <a href="{% url 'feedback_form' %}" class="feedback-btn">Give Feedback</a>
+</div>
+</section>
+
+<script>
+ let scrollDirection = 1; // 1 = right, -1 = left
+
+function scrollFeedback(step) {
+  const container = document.getElementById("feedbackScroll");
+
+  // Scroll in current direction
+  container.scrollBy({ left: step * scrollDirection * 50, behavior: "smooth" });
+
+  // Check if we reached the end or beginning
+  const maxScroll = container.scrollWidth - container.clientWidth;
+  if (container.scrollLeft >= maxScroll) {
+    scrollDirection = -2; // change to left
+  } else if (container.scrollLeft <= 0) {
+    scrollDirection = 2; // change to right
+  }
+}
+
+// Auto-scroll every 400ms
+setInterval(() => {
+  scrollFeedback(1); // 1 unit at a time
+}, 1000);
+</script>
+
+
+{% endblock %}
